@@ -4,9 +4,10 @@ import React from 'react'
 const Task = () => {
   return (
     <View>
-      <Text>Task</Text>
+      <View style={{width:10,height:90}} > </View>
+     
     </View>
   )
 }
 
-export default Task
+export default Task;
