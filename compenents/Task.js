@@ -5,8 +5,8 @@ const Task = (props) => {
   return (
     <SafeAreaView>
       <View>
-        <View style={{ padding: 50 }}>
-          <Text>TODO list</Text>
+        <View style={{ padding: 40 }}>
+          <Text style={{ fontWeight: "bold", fontSize: 32 }}>TODO list</Text>
         </View>
         <View
           style={{
@@ -31,14 +31,8 @@ const Task = (props) => {
               borderColor: "#0000A5",
             }}
           ></View>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
-          </View>
+
+          <Text style={{ fontWeight: "bold" }}>{props.name}</Text>
         </View>
       </View>
     </SafeAreaView>
