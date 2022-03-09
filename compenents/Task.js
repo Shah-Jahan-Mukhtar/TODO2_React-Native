@@ -4,15 +4,15 @@ import React from "react";
 const Task = (props) => {
   return (
     <SafeAreaView>
-      <View>
+      <View style={{ justifyContent: "space-around", alignItems: "center" }}>
         <View
           style={{
             width: "90%",
             height: 50,
             backgroundColor: "white",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             alignItems: "center",
-            marginLeft: "5%",
+            // marginLeft: "5%",
             borderRadius: 10,
             flexDirection: "row",
             marginBottom: 10,
@@ -20,19 +20,20 @@ const Task = (props) => {
         >
           <View
             style={{
-              marginRight: "75%",
-              marginLeft: 10,
+              // marginLeft: 10,
               width: 20,
               height: 20,
               borderWidth: 5,
-              borderRadius: 5,
+              borderRadius: 50,
+              marginRight: 5,
               borderColor: "#0000A5",
             }}
           ></View>
-
-          <Text style={{ fontWeight: "bold", marginRight: 25, color: "red" }}>
-            {props.name}
-          </Text>
+          <View>
+            <Text style={{ fontWeight: "bold", marginRight: 25, color: "red" }}>
+              {props.name}
+            </Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
