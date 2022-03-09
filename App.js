@@ -22,6 +22,12 @@ export default function App() {
     setTask(null);
   };
 
+  const Delete = (index) => {
+    const del = [...taskAdd];
+    del.splice(index, 1);
+    setTaskAdd(del);
+  };
+
   return (
     <SafeAreaView style={{ marginTop: 25 }}>
       <View style={styles.container}>
@@ -32,7 +38,16 @@ export default function App() {
           </Text>
           <View>
             {taskAdd.map((item, index) => {
-              return <Task name={item} key={index} />;
+              return (
+                <TouchableOpacity
+                  key={index}
+                  onPress={() => {
+                    Delete();
+                  }}
+                >
+                  <Task name={item} />
+                </TouchableOpacity>
+              );
             })}
           </View>
 
