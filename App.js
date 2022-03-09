@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 import Task from "./compenents/Task";
+import Update from "./compenents/Update";
 
 export default function App() {
   const [task, setTask] = useState("");
@@ -26,6 +27,10 @@ export default function App() {
     const del = [...taskAdd];
     del.splice(index, 1);
     setTaskAdd(del);
+  };
+
+  const Update = () => {
+    setTaskAdd([...taskAdd, ""]);
   };
 
   return (
