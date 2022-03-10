@@ -9,83 +9,63 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  FlatList,
 } from "react-native";
+import Icon from "react-native-vector-icons/MaterialIcons";
+// import ListItem from "./compenents/ListItem";
+// import Task from "./compenents/Task";
+// import Update from "./compenents/Update";
 
-import Task from "./compenents/Task";
-import Update from "./compenents/Update";
+const COLORS = { primary: "#1f145c", white: "#fff" };
 
 export default function App() {
-  const [task, setTask] = useState("");
-  const [taskAdd, setTaskAdd] = useState([]);
+  const [todos, setTodos] = React.useState([
+    {
+      id: 1,
+      task: "First todo",
+      completed: true,
+    },
+    {
+      id: 2,
+      task: "Second todo",
+      completed: true,
+    },
+  ]);
 
-  const Add = () => {
-    setTaskAdd([...taskAdd, task]);
-    setTask(null);
-  };
-
-  const Delete = (index) => {
-    const del = [...taskAdd];
-    del.splice(index, 1);
-    setTaskAdd(del);
-  };
-
-  const Update = () => {
-    setTaskAdd([...taskAdd, ""]);
-  };
-
-  return (
-    <SafeAreaView style={{ marginTop: 25 }}>
-      <View style={styles.container}>
-        <ScrollView>
-          <StatusBar style="auto" />
-          <Text style={{ padding: 40, fontWeight: "bold", fontSize: 25 }}>
-            TODO LIST
+  const ListItem = ({ todo }) => {
+    return (
+      <View style={styles.listItem}>
+        <View>
+          <Text
+            style={{ fontWeight: "bold", fontSize: 15, color: COLORS.primary }}
+          >
+            {todo?.task}
           </Text>
-          <View>
-            {taskAdd.map((item, index) => {
-              return (
-                <TouchableOpacity
-                  key={index}
-                  onPress={() => {
-                    Delete();
-                  }}
-                >
-                  <Task name={item} />
-                </TouchableOpacity>
-              );
-            })}
+        </View>
+      </View>
+    );
+  };
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.white }}>
+      <View style={styles.container}>
+        <Text style={{ fontWeight: "bold", fontSize: 20 }}>TODO APP</Text>
+        <Icon name="delete" size={25} color="red" />
+      </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ padding: 20, paddingBottom: 100 }}
+        data={todos}
+        renderItem={({ item }) => <ListItem todo={item} />}
+      />
+      <View style={styles.footer}>
+        <View style={styles.inputContainer}>
+          <TextInput placeholder="Add Todo" />
+        </View>
+        <TouchableOpacity>
+          <View style={styles.iconContainer}>
+            <Icon name="add" size={15} color={COLORS.white} />
           </View>
-
-          <View style={{ marginTop: 470, flexDirection: "row" }}>
-            <KeyboardAvoidingView style={{ flexDirection: "row" }}>
-              <TextInput
-                style={styles.input}
-                placeholder="Enter The Task"
-                value={task}
-                onChangeText={(test) => setTask(test)}
-              />
-              <TouchableOpacity onPress={() => Add()}>
-                <View
-                  style={{
-                    width: 50,
-                    height: 50,
-                    backgroundColor: "#FD1C03",
-                    borderRadius: 50,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    marginLeft: 10,
-                  }}
-                >
-                  <Text
-                    style={{ fontWeight: "bold", fontSize: 20, color: "white" }}
-                  >
-                    +
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </KeyboardAvoidingView>
-          </View>
-        </ScrollView>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -93,16 +73,45 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#DCDCDC",
-    width: "100%",
-    height: "100%",
+    padding: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  input: {
-    width: 280,
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    color: COLORS.white,
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 20,
+  },
+  inputContainer: {
+    backgroundColor: COLORS.white,
+    elevation: 40,
+    flex: 1,
+    height: 40,
+    marginVertical: 20,
+    marginRight: 20,
+    borderRadius: 30,
+    paddingHorizontal: 20,
+  },
+  iconContainer: {
+    width: 50,
     height: 50,
-    backgroundColor: "white",
-    padding: 10,
-    marginLeft: 10,
-    borderRadius: 20,
+    backgroundColor: COLORS.primary,
+    borderRadius: 25,
+    elevation: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  listItem: {
+    padding: 20,
+    backgroundColor: COLORS.white,
+    flexDirection: "row",
+    elevation: 12,
+    borderRadius: 7,
+    marginVertical: 10,
   },
 });
